@@ -20,24 +20,32 @@ const NoVideo = () => {
   };
 
   return (
-    <div className="panel">
-      <p className="panel-heading">Find a video</p>
-      <div className="panel-block">
-        <p className="control has-icons-left">
-          <input
-            className="input"
-            type="text"
-            placeholder="Enter a YouTube video URL..."
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-          />
-          <span className="icon is-left">
-            <FontAwesomeIcon icon={faSearch} />
-          </span>
-        </p>
-        <button className="button is-outlined" onClick={onSearchVideo}>
-          Go
-        </button>
+    <div className="container">
+      <div className="card">
+        <div className="card-header">
+          <p className="card-header-title">Find a video</p>
+        </div>
+        <div className="card-content">
+          <div className="content">
+            <p className="control has-icons-left">
+              <input
+                className="input"
+                type="text"
+                placeholder="Enter a YouTube video URL or video ID..."
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+              />
+              <span className="icon is-left">
+                <FontAwesomeIcon icon={faSearch} />
+              </span>
+            </p>
+            <div className="is-flex is-justify-content-end">
+              <button className="button is-danger" onClick={onSearchVideo}>
+                Find video
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

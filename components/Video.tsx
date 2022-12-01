@@ -197,139 +197,143 @@ const Video = ({ video }: VideoProps) => {
     .sort((a: any, b: any) => b.width - a.width);
 
   return (
-    <>
-      <div className="card mb-6">
-        <div className="card-image">
-          <figure className="image is-16by9">
-            <Image
-              src={thumbnail?.url}
-              alt={video.title}
-              width={thumbnail?.width}
-              height={thumbnail?.height}
-            />
-          </figure>
-        </div>
-        <div className="card-content">
-          <p className="title is-4 mb-4">
-            {video.title}
-          </p>
-          <div className="media is-flex is-align-items-center">
-            <div className="media-left">
-              <figure className="image is-48x48">
-                <Image
-                  src={video.channel.thumbnails.medium.url}
-                  alt={video.channelTitle}
-                  width={48}
-                  height={48}
-                />
-              </figure>
-            </div>
-            <div className="media-content">
-              <p className="subtitle is-6 mb-0">
-                {video.channelTitle}
-              </p>
-              <p className="is-size-7">
-                {`${formatter.format(video.channel.subscriberCount)} subscribers`}
-              </p>
-            </div>
+    <div className="columns is-desktop">
+      <div className="column">
+        <div className="card">
+          <div className="card-image">
+            <figure className="image is-16by9">
+              <Image
+                src={thumbnail?.url}
+                alt={video.title}
+                width={thumbnail?.width}
+                height={thumbnail?.height}
+              />
+            </figure>
           </div>
-          <div className="content">
-            <span className="mr-2">
-              {DateTime.fromISO(video.publishedAt).toRelative()}
-            </span>
-            {' · '}
-            <span className="mx-2">
-              <FontAwesomeIcon icon={faThumbsUp} />
-              {' '}
-              {formatter.format(video.likeCount)}
-            </span>
-            {' · '}
-            <span className="mx-2">
-              <FontAwesomeIcon icon={faComments} />
-              {' '}
-              {formatter.format(video.commentCount)}
-            </span>
-            {' · '}
-            <span className="mx-2">
-              {`${formatter.format(video.viewCount)} views`}
-            </span>
-            {' · '}
-            <span className="ml-2">
-              <a href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noreferrer">
-                <FontAwesomeIcon icon={faExternalLinkAlt} />
-              </a>
-            </span>
-          </div>
-          <div className="content">
-            <hr />
-            <p style={{ whiteSpace: 'pre-wrap' }}>
-              {descriptionShowMore ? video.description : video.description.slice(0, 150)}
-              {video.description.length > 200 && !descriptionShowMore && (
-                <span className="ml-3">
-                  {' '}
-                  <small>
-                    <a className="has-text-grey" onClick={() => setDescriptionShowMore(true)}>Read more</a>
-                  </small> 
-                </span>
-              )}
-              {video.description.length > 150 && descriptionShowMore && (
-                <p className="pt-3">
-                  <small>
-                    <a className="has-text-grey" onClick={() => setDescriptionShowMore(false)}>Read less</a>
-                  </small>
-                </p>
-              )}
+          <div className="card-content">
+            <p className="title is-4 mb-4">
+              {video.title}
             </p>
+            <div className="media is-flex is-align-items-center">
+              <div className="media-left">
+                <figure className="image is-48x48">
+                  <Image
+                    src={video.channel.thumbnails.medium.url}
+                    alt={video.channelTitle}
+                    width={48}
+                    height={48}
+                  />
+                </figure>
+              </div>
+              <div className="media-content">
+                <p className="subtitle is-6 mb-0">
+                  {video.channelTitle}
+                </p>
+                <p className="is-size-7">
+                  {`${formatter.format(video.channel.subscriberCount)} subscribers`}
+                </p>
+              </div>
+            </div>
+            <div className="content">
+              <span className="mr-2">
+                {DateTime.fromISO(video.publishedAt).toRelative()}
+              </span>
+              {' · '}
+              <span className="mx-2">
+                <FontAwesomeIcon icon={faThumbsUp} />
+                {' '}
+                {formatter.format(video.likeCount)}
+              </span>
+              {' · '}
+              <span className="mx-2">
+                <FontAwesomeIcon icon={faComments} />
+                {' '}
+                {formatter.format(video.commentCount)}
+              </span>
+              {' · '}
+              <span className="mx-2">
+                {`${formatter.format(video.viewCount)} views`}
+              </span>
+              {' · '}
+              <span className="ml-2">
+                <a href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noreferrer">
+                  <FontAwesomeIcon icon={faExternalLinkAlt} />
+                </a>
+              </span>
+            </div>
+            <div className="content">
+              <hr />
+              <p style={{ whiteSpace: 'pre-wrap' }}>
+                {descriptionShowMore ? video.description : video.description.slice(0, 150)}
+                {video.description.length > 200 && !descriptionShowMore && (
+                  <span className="ml-3">
+                    {' '}
+                    <small>
+                      <a className="has-text-grey" onClick={() => setDescriptionShowMore(true)}>Read more</a>
+                    </small> 
+                  </span>
+                )}
+                {video.description.length > 150 && descriptionShowMore && (
+                  <p className="pt-3">
+                    <small>
+                      <a className="has-text-grey" onClick={() => setDescriptionShowMore(false)}>Read less</a>
+                    </small>
+                  </p>
+                )}
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <div className="card">
-        <div className="card-content">
-          <div className="content">
-            <div className="control has-icons-left">
-              <span className="icon is-left">
-                <FontAwesomeIcon icon={faSearch} />
-              </span>
-              <input
-                className="input"
-                type="text"
-                placeholder="Search comments..."
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-              />
+      <div className="column">
+        <div className="card">
+          <div className="card-content">
+            <div className="content">
+              <div className="control has-icons-left">
+                <span className="icon is-left">
+                  <FontAwesomeIcon icon={faSearch} />
+                </span>
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Search comments..."
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
+              </div>
             </div>
-          </div>
-          <hr />
-          {comments.length === 0 && (
-            <article className="media py-6">
-              <div className="media-content">
+            <hr />
+            {comments.length === 0 && (
+              <article className="media py-6">
+                <div className="media-content">
+                  <div className="content">
+                    <p className="has-text-weight-light has-text-centered">
+                      No comments found
+                    </p>
+                  </div>
+                </div>
+              </article>
+            )}
+            {comments.map((comment: any) => (
+              <Comment
+                key={comment.id}
+                comment={comment}
+              />
+            ))}
+            {isSearchActive && (
+              <>
+                <hr />
                 <div className="content">
-                  <p className="has-text-weight-light has-text-centered">
-                    No comments found
+                  <p className="subtitle is-6">
+                    {`Showing ${comments.length} of ${video.commentCount} ${video.commentCount === 1 ? 'comment' : 'comments'}`}
                   </p>
                 </div>
-              </div>
-            </article>
-          )}
-          {comments.map((comment: any) => (
-            <Comment
-              key={comment.id}
-              comment={comment}
-            />
-          ))}
-          {isSearchActive && (
-            <>
-              <hr />
-              <div className="content">
-                <p className="subtitle is-6">
-                  {`Showing ${comments.length} of ${video.commentCount} ${video.commentCount === 1 ? 'comment' : 'comments'}`}
-                </p>
-              </div>
-            </>
-          )}
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

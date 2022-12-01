@@ -13,23 +13,23 @@ import '../styles/Home.module.scss';
 
 export default function Home({ video }: any) {
   return (
-    <div className="container has-background-light h-100-vh">
+    <div className="has-background-light full-height">
       <Head>
         <title>YouTube Comments</title>
         <meta name="description" content="Sometimes you just want to copy and paste a comment" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <nav className="navbar is-danger" role="navigation" aria-label="main navigation">
-        <div className="navbar-brand">
-          <Link className="navbar-item" href="/">
-            <FontAwesomeIcon icon={faComments} />
-            <span className="ml-2">YouTube Comments</span>
-          </Link>
+        <div className="container">
+          <div className="navbar-brand">
+            <Link className="navbar-item" href="/">
+              <FontAwesomeIcon icon={faComments} />
+              <span className="ml-2">YouTube Comments</span>
+            </Link>
+          </div>
         </div>
       </nav>
-
       <main className="section">
         {video ? <Video video={video} /> : <NoVideo />}
       </main>
