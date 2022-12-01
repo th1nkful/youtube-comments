@@ -129,7 +129,36 @@ const Comment = ({ comment }: any) => {
   );
 };
 
-const Video = ({ video }: any) => {
+type Thumbnails = {
+  [key: string]: {
+    url: string;
+    width: number;
+    height: number;
+  };
+}
+
+type Video = {
+  id: string;
+  title: string;
+  comments: any[];
+  description: string;
+  publishedAt: string;
+  channelTitle: string;
+  likeCount: number;
+  viewCount: number;
+  commentCount: number;
+  channel: {
+    thumbnails: Thumbnails;
+    subscriberCount: number;
+  };
+  thumbnails: Thumbnails;
+}
+
+type VideoProps = {
+  video: Video;
+}
+
+const Video = ({ video }: VideoProps) => {
   const [descriptionShowMore, setDescriptionShowMore] = React.useState(false);
 
   const [searchInput, setSearchInput] = React.useState('');
@@ -139,7 +168,7 @@ const Video = ({ video }: any) => {
   const commentsFlat = React.useMemo(() => {
     const flat: any[] = [];
 
-    const flatten = (list = []) => {
+    const flatten = (list: any[] = []) => {
       list.forEach((item: any) => {
         flat.push(item);
         flatten(item.replies);
@@ -163,16 +192,20 @@ const Video = ({ video }: any) => {
 
   const formatter = Intl.NumberFormat('en', { notation: 'compact' });
 
+  const [thumbnail] = Object
+    .values(video.thumbnails)
+    .sort((a: any, b: any) => b.width - a.width);
+
   return (
     <>
       <div className="card mb-6">
         <div className="card-image">
           <figure className="image is-16by9">
             <Image
-              src={video.thumbnails.maxres.url}
+              src={thumbnail?.url}
               alt={video.title}
-              width={video.thumbnails.maxres.width}
-              height={video.thumbnails.maxres.height}
+              width={thumbnail?.width}
+              height={thumbnail?.height}
             />
           </figure>
         </div>
