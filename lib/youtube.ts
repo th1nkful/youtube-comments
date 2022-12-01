@@ -63,7 +63,7 @@ const getChannel = async (id: string) => {
   };
 };
 
-const formatReplies = (replies) => replies.comments.map(({ id, snippet }) => ({
+const formatReplies = (replies: any) => replies.comments.map(({ id, snippet }: any) => ({
   id,
   likeCount: snippet.likeCount,
   edited: snippet.textDisplay !== snippet.textOriginal,
@@ -75,7 +75,7 @@ const formatReplies = (replies) => replies.comments.map(({ id, snippet }) => ({
   },
 }));
 
-const formatComments = (comments) => comments.map(({ id, snippet, replies }) => ({
+const formatComments = (comments: any[]) => comments.map(({ id, snippet, replies }: any) => ({
   id,
   replyCount: snippet.totalReplyCount,
   likeCount: snippet.topLevelComment.snippet.likeCount,
@@ -93,7 +93,7 @@ const formatComments = (comments) => comments.map(({ id, snippet, replies }) => 
     : [],
 }));
 
-const getComments = async (id: string, allComments = [], pageToken = undefined) => {
+const getComments = async (id: string, allComments: any[] = [], pageToken: string|undefined = undefined): Promise<any[]> => {
   const urlParams = new URLSearchParams({
     videoId: findVideoId(id) as string,
     part: 'id,snippet,replies',

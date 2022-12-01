@@ -11,7 +11,7 @@ import getVideoDetails from '../lib/youtube';
 
 import '../styles/Home.module.scss';
 
-export default function Home({ video }) {
+export default function Home({ video }: any) {
   return (
     <div className="container has-background-light h-100-vh">
       <Head>

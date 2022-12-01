@@ -12,11 +12,11 @@ import {
   faComments,
 } from '@fortawesome/free-solid-svg-icons';
 
-const sanitizedData = (data) => ({
+const sanitizedData = (data: string) => ({
   __html: DOMPurify.sanitize(data)
 });
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment }: any) => {
   const commentTextRef = React.useRef(null);
 
   const [isCopied, setIsCopied] = React.useState(false);
@@ -38,8 +38,12 @@ const Comment = ({ comment }) => {
 
   const [isLotsOfText, setIsLotsOfText] = React.useState(false);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(() => {
-    if (commentTextRef.current && commentTextRef.current.clientHeight > 100) {
+    if (!commentTextRef.current) return;
+
+    // @ts-ignore
+    if (commentTextRef.current.clientHeight > 100) {
       setIsLotsOfText(true);
     }
   });
@@ -114,7 +118,7 @@ const Comment = ({ comment }) => {
             </small>
           </p>
         </div>
-        {(comment.replies || []).map((reply) => (
+        {(comment.replies || []).map((reply: any) => (
           <Comment
             key={reply.id}
             comment={reply}
@@ -125,7 +129,7 @@ const Comment = ({ comment }) => {
   );
 };
 
-const Video = ({ video }) => {
+const Video = ({ video }: any) => {
   const [descriptionShowMore, setDescriptionShowMore] = React.useState(false);
 
   const [searchInput, setSearchInput] = React.useState('');
@@ -133,10 +137,10 @@ const Video = ({ video }) => {
   const isSearchActive = searchInput.length > 0;
 
   const commentsFlat = React.useMemo(() => {
-    const flat = [];
+    const flat: any[] = [];
 
     const flatten = (list = []) => {
-      list.forEach((item) => {
+      list.forEach((item: any) => {
         flat.push(item);
         flatten(item.replies);
       });
@@ -274,7 +278,7 @@ const Video = ({ video }) => {
               </div>
             </article>
           )}
-          {comments.map((comment) => (
+          {comments.map((comment: any) => (
             <Comment
               key={comment.id}
               comment={comment}
